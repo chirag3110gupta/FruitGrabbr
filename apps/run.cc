@@ -1,9 +1,8 @@
 // Copyright (c) 2020 [Your Name]. All rights reserved.
-
+#include "my_app.h"
 #include <cinder/app/App.h>
 #include <cinder/app/RendererGl.h>
 
-#include "my_app.h"
 
 
 using cinder::app::App;

@@ -2,9 +2,11 @@
 
 #ifndef FINALPROJECT_APPS_MYAPP_H_
 #define FINALPROJECT_APPS_MYAPP_H_
-
+#include <opencv2/opencv.hpp>
+#include <Box2D/Common/b2Math.h>
+#include <Box2D/Dynamics/b2World.h>
 #include <cinder/app/App.h>
-
+#include <cinder/gl/Texture.h>
 
 namespace myapp {
 
@@ -15,6 +17,19 @@ class MyApp : public cinder::app::App {
   void update() override;
   void draw() override;
   void keyDown(cinder::app::KeyEvent) override;
+
+ private:
+  void DrawScore();
+  void DrawLogo();
+  template <typename C>
+  void PrintText(const std::string& text, const C& color, const cinder::ivec2& size,
+                 const cinder::vec2& loc);
+  b2Vec2 gravity_;
+  b2World* world_;
+  cv::Mat frame_;
+  cv::VideoCapture* vid_;
+  cinder::gl::Texture2dRef background_;
+  int currentscore_;
 };
 
 }  // namespace myapp

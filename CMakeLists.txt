@@ -17,6 +17,7 @@ project(FinalProject
         DESCRIPTION "CS 126 Final Project"
         LANGUAGES CXX)
 
+
 include(ExternalProject)
 # Optionally set things like CMAKE_CXX_STANDARD, CMAKE_POSITION_INDEPENDENT_CODE here
 
@@ -99,3 +100,20 @@ if(NOT gflags_POPULATED)
     FetchContent_Populate(gflags)
     add_subdirectory(${gflags_SOURCE_DIR} ${gflags_BINARY_DIR})
 endif()
+
+find_package(OpenCV REQUIRED) # after project()
+add_library(opencv INTERFACE)
+include_directories(${OpenCV_INCLUDE_DIRS})
+target_link_libraries(opencv INTERFACE ${OpenCV_LIBS})
+
+#FetchContent_GetProperties(opencv)
+
+#if(NOT opencv_POPULATED)
+#    FetchContent_Populate(opencv)
+#    add_library(opencv INTERFACE)
+#    target_include_directories(opencv PRIVATE ${OpenCV_INCLUDE_DIRS} )
+#
+#endif()
+
+
+
