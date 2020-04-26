@@ -1,13 +1,22 @@
 // Copyright (c) 2020 [Your Name]. All rights reserved.
-#include <opencv2/opencv.hpp>
-#include "my_app.h"
-#include <Box2D/Common/b2Math.h>
+#include "fruit_grabber.h"
+
 #include <cinder/app/App.h>
+#include <gflags/gflags.h>
+
+#include <opencv2/opencv.hpp>
+
 #include "cinder/ImageIo.h"
 #include "cinder/gl/Texture.h"
-#include "cinder/gl/gl.h"
 #include "cinder/gl/draw.h"
+#include "cinder/gl/gl.h"
 
+using namespace cinder;
+
+DECLARE_uint32(size);
+DECLARE_uint32(tilesize);
+DECLARE_uint32(speed);
+DECLARE_string(name);
 
 namespace myapp {
 
@@ -15,15 +24,15 @@ using cinder::app::KeyEvent;
 const char kBoldFont[] = "Arial Bold";
 const int kTextBuffer = 50;
 
-MyApp::MyApp() {
-  gravity_.x = (0.0f);
-  gravity_.y = (-10.0f);
-  world_ = new b2World(gravity_);
+MyApp::MyApp()
+: engine_(FLAGS_size, FLAGS_size)
+ {
   vid_ = new cv::VideoCapture(0);
-  currentscore_ = 0;
-}
+ }
 
 void MyApp::setup() {
+  cinder::gl::enableDepthWrite();
+  cinder::gl::enableDepthRead();
   if (!vid_->isOpened()) {
     return;
   }
@@ -31,20 +40,47 @@ void MyApp::setup() {
 
 void MyApp::update() {
     if (vid_->read(frame_)) {
-        cv::Mat flipped;
-        cv::flip(frame_, flipped, 1);
-        cv::imwrite("/Users/chiraggupta/CLionProjects/cinder_0.9.2_mac"
-                    "/my-projects/myapp-chiragg4/assets/fram.jpg", flipped);
-        background_ =  cinder::gl::Texture2d::create(loadImage
-            ( loadAsset( "fram.jpg" ) ));
+      cv::Mat flipped;
+      cv::flip(frame_, flipped, 1);
+      cv::imwrite("/Users/chiraggupta/CLionProjects/cinder_0.9.2_mac"
+                  "/my-projects/myapp-chiragg4/assets/fram.jpg", flipped);
+      background_ =  cinder::gl::Texture2d::create(loadImage
+                                                       ( loadAsset( "fram.jpg" ) ));
+      cv::Mat hsv;
+      cv::cvtColor(flipped, hsv, cv::COLOR_BGR2HSV);
+      cv::Mat container;
+      cv::inRange(hsv, cv::Scalar(20, 100, 70), cv::Scalar(70, 255, 255), container);
+      cv::Mat nonZeroCoordinates;
+      findNonZero(container, nonZeroCoordinates);
+      for (int i = 0; i < nonZeroCoordinates.total(); i++ ) {
+
+      }
+      engine_.Step();
+
+//      cv::imwrite("/Users/chiraggupta/CLionProjects/cinder_0.9.2_mac"
+//                  "/my-projects/myapp-chiragg4/assets/fram.jpg", container);
+//      background_ =  cinder::gl::Texture2d::create(loadImage
+//                                                       ( loadAsset( "fram.jpg" ) ));
     }
 }
 
 void MyApp::draw() {
   cinder::gl::clear();
-  cinder::gl::draw(background_);
+  gl::enableDepthRead();
+  gl::enableDepthWrite();
+
+//  CameraPersp cam;
+//  cam.lookAt( vec3( 400, 400 , 800), vec3( 400,400,0));
+//  gl::setMatrices( cam );
+//
+//  auto lambert = gl::ShaderDef().lambert();
+//  auto shader = gl::getStockShader( lambert );
+//  shader->bind();
+  engine_.Draw();
+  gl::draw(background_);
   DrawScore();
   DrawLogo();
+
 }
 
 void MyApp::keyDown(KeyEvent event) { }
@@ -56,7 +92,7 @@ void MyApp::DrawScore() {
   const cinder::vec2 location = loc;
   const cinder::ivec2 size = {500, 50};
   const cinder::Color color = cinder::Color::white();
-  PrintText("Score: " + std::to_string(currentscore_), color, size, location);
+  PrintText("Score: " + std::to_string(engine_.GetScore() - 1), color, size, location);
 }
 
 void MyApp::DrawLogo() {

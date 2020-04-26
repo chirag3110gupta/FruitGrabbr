@@ -11,7 +11,8 @@ file(GLOB SOURCE_LIST CONFIGURE_DEPENDS
         "${FinalProject_SOURCE_DIR}/src/*.h"
         "${FinalProject_SOURCE_DIR}/src/*.hpp"
         "${FinalProject_SOURCE_DIR}/src/*.cc"
-        "${FinalProject_SOURCE_DIR}/src/*.cpp")
+        "${FinalProject_SOURCE_DIR}/src/*.cpp"
+        "${FinalProject_SOURCE_DIR}/src/fruit_textures")
 
 
 ci_make_library(

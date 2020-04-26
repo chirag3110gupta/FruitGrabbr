@@ -1,8 +1,15 @@
 // Copyright (c) 2020 [Your Name]. All rights reserved.
-#include "my_app.h"
+#include "fruit_grabber.h"
 #include <cinder/app/App.h>
 #include <cinder/app/RendererGl.h>
+#include <gflags/gflags.h>
 
+
+
+DEFINE_uint32(size, 16, "the number of tiles in each row and column");
+DEFINE_uint32(tilesize, 50, "the size of each tile");
+DEFINE_uint32(speed, 50, "the speed (delay) of the game");
+DEFINE_string(name, "Chirag", "the name of the player");
 
 
 using cinder::app::App;
@@ -17,7 +24,7 @@ const int kHeight = 800;
 
 void SetUp(App::Settings* settings) {
   settings->setWindowSize(kWidth, kHeight);
-  settings->setTitle("My CS 126 Application");
+  settings->setTitle("FruitGrabber");
 }
 
 }  // namespace myapp

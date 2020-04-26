@@ -106,14 +106,6 @@ add_library(opencv INTERFACE)
 include_directories(${OpenCV_INCLUDE_DIRS})
 target_link_libraries(opencv INTERFACE ${OpenCV_LIBS})
 
-#FetchContent_GetProperties(opencv)
-
-#if(NOT opencv_POPULATED)
-#    FetchContent_Populate(opencv)
-#    add_library(opencv INTERFACE)
-#    target_include_directories(opencv PRIVATE ${OpenCV_INCLUDE_DIRS} )
-#
-#endif()
 
 
 
