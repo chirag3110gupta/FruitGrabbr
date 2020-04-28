@@ -10,3 +10,13 @@
    - Linked Box2D as a CinderBlock so that I can implement in-game Physics.
    - Implemented webcam and set it as cinder background
    - Added Logo and Score
+
+- **4/26/20**  Made basic classes
+   - Made engine and fruit, wrote methods
+   - Made fruits fall
+   - Completed implementations of helpers
+   
+- **4/26/20**  Implemented color recognition
+    - Implemented color recognition using openCV
+    - Added colors to the fruits
+    - Made game visually better

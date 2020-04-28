@@ -26,7 +26,7 @@ class Engine {
   Location GetRandomLocation();
  private:
   int score_;
-  Location container_;
+  std::vector<Location> container_;
   std::vector<Fruit> fruits_;
   bool is_game_over;
   const size_t width_;

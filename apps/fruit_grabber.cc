@@ -11,6 +11,7 @@
 #include "cinder/gl/draw.h"
 #include "cinder/gl/gl.h"
 
+using std::chrono::system_clock;
 using namespace cinder;
 
 DECLARE_uint32(size);
@@ -42,25 +43,29 @@ void MyApp::update() {
     if (vid_->read(frame_)) {
       cv::Mat flipped;
       cv::flip(frame_, flipped, 1);
-      cv::imwrite("/Users/chiraggupta/CLionProjects/cinder_0.9.2_mac"
-                  "/my-projects/myapp-chiragg4/assets/fram.jpg", flipped);
-      background_ =  cinder::gl::Texture2d::create(loadImage
-                                                       ( loadAsset( "fram.jpg" ) ));
+//      cv::imwrite("/Users/chiraggupta/CLionProjects/cinder_0.9.2_mac"
+//                  "/my-projects/myapp-chiragg4/assets/fram.jpg", flipped);
       cv::Mat hsv;
       cv::cvtColor(flipped, hsv, cv::COLOR_BGR2HSV);
       cv::Mat container;
-      cv::inRange(hsv, cv::Scalar(20, 100, 70), cv::Scalar(70, 255, 255), container);
+      cv::inRange(hsv, cv::Scalar(30, 100, 50), cv::Scalar(70, 255, 255), container);
       cv::Mat nonZeroCoordinates;
-      findNonZero(container, nonZeroCoordinates);
-      for (int i = 0; i < nonZeroCoordinates.total(); i++ ) {
-
-      }
-      engine_.Step();
-
 //      cv::imwrite("/Users/chiraggupta/CLionProjects/cinder_0.9.2_mac"
 //                  "/my-projects/myapp-chiragg4/assets/fram.jpg", container);
-//      background_ =  cinder::gl::Texture2d::create(loadImage
-//                                                       ( loadAsset( "fram.jpg" ) ));
+      background_ =  cinder::gl::Texture2d::create(loadImage
+                                                       ( loadAsset( "fram.jpg" ) ));
+      cv::imwrite("/Users/chiraggupta/CLionProjects/cinder_0.9.2_mac"
+                  "/my-projects/myapp-chiragg4/assets/fram.jpg", container);
+      background_ =  cinder::gl::Texture2d::create(loadImage
+                                                       ( loadAsset( "fram.jpg" ) ));
+      findNonZero(container, nonZeroCoordinates);
+      //engine_.makeContainer(nonZeroCoordinates);
+      const auto time = system_clock::now();
+      if (time - last_time_ > std::chrono::milliseconds(FLAGS_speed)) {
+        engine_.Step();
+        last_time_ = time;
+      }
+
     }
 }
 

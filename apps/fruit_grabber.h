@@ -29,6 +29,7 @@ class MyApp : public cinder::app::App {
   cv::VideoCapture* vid_;
   cinder::gl::Texture2dRef background_;
   Engine engine_;
+  std::chrono::time_point<std::chrono::system_clock> last_time_;
 };
 
 }  // namespace myapp

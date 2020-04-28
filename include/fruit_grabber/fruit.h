@@ -7,7 +7,7 @@
 
 #include <cinder/gl/Texture.h>
 #include <cinder/gl/gl.h>
-
+#include <vector>
 #include "location.h"
 #include "string"
 
@@ -23,6 +23,7 @@ class Fruit {
   ~Fruit();
 
   Location GetLocation() const;
+  int GetType() const;
   void Step();
   void Draw();
 
@@ -31,9 +32,10 @@ class Fruit {
  private:
   Location location_;
   int type_;
-  cinder::gl::TextureRef background_;
-  cinder::gl::BatchRef	mSphere_;
-  cinder::gl::GlslProgRef mGlsl_;
+  std::vector<cinder::Color> colors_;
+//  cinder::gl::Texture2dRef background_;
+//  cinder::gl::BatchRef	mSphere_;
+//  cinder::gl::GlslProgRef mGlsl_;
 };
 
 #endif  // FINALPROJECT_FRUIT_H

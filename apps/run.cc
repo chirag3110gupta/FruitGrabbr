@@ -8,7 +8,7 @@
 
 DEFINE_uint32(size, 16, "the number of tiles in each row and column");
 DEFINE_uint32(tilesize, 50, "the size of each tile");
-DEFINE_uint32(speed, 50, "the speed (delay) of the game");
+DEFINE_uint32(speed, 100, "the speed (delay) of the game");
 DEFINE_string(name, "Chirag", "the name of the player");
 
 

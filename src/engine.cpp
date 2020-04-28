@@ -13,7 +13,7 @@ void Engine::Reset() {
 Engine::Engine(size_t width, size_t height)
     : width_{width},
       height_{height},
-      container_(0,0),
+      container_{{8,8}},
       score_{1},
       is_game_over{false}
       {
@@ -26,7 +26,7 @@ void Engine::Step() {
         std::rand() % 4)));
   }
   for (Fruit& fruit : fruits_) {
-    if (fruit.is_visible_ && fruit.GetLocation() == container_) {
+    if (fruit.is_visible_ && fruit.GetLocation() == container_.at(0)) {
       fruit.is_visible_ = false;
       score_++;
     } else if (fruit.is_visible_) {
@@ -45,7 +45,7 @@ Location Engine::GetRandomLocation() {
 
   for (size_t col = 0; col < width_; ++col) {
     Location loc( col, 0);
-    if (std::rand() % 50== 0) {
+    if (std::rand() % 15 == 0) {
       final_location = loc;
     }
   }

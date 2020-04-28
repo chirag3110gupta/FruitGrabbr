@@ -11,17 +11,24 @@ using namespace cinder;
 Fruit::Fruit(const Location& location, const int type) : location_(location) {
   type_ = type;
   is_visible_ = true;
+  colors_ =
+      {       cinder::Color(1, 0, 0),
+             cinder::Color(0, 1, 0),
+              cinder::Color(0, 0, 1),
+              cinder::Color(1, 0, 1),
+      };
 }
 
 Location Fruit::GetLocation() const { return location_; }
+int Fruit::GetType() const { return type_; }
 void Fruit::Step() {
   location_ = location_ + Location{0,1};
 }
 
 void Fruit::Draw() {
-//  auto img = cinder::loadImage("fruit_textures/orange.jpg");
-//  background_ = cinder::gl::Texture::create( img );
-//  background_->bind();
+  //auto img = cinder::loadImage("fruit_textures/orange.jpg");
+  //background_ = cinder::gl::Texture::create( img );
+  //background_->bind();
 //  auto shader = cinder::gl::ShaderDef().texture().lambert();
 //  mGlsl_ = cinder::gl::getStockShader( shader );
 //  auto sphere = cinder::geom::Sphere().subdivisions( 50 );
@@ -38,7 +45,9 @@ void Fruit::Draw() {
 //  shader->bind();
   //gl::drawSphere( vec3(), 0.2, 40 );
   //gl::clear();
+  gl::color(colors_.at(type_));
   gl::drawSolidEllipse(glm::vec2{(location_.Row() * 50) + 8, (location_.Col() * 50) + 8},32, 32);
+  gl::color(1,1,1);
 }
 
 Fruit::Fruit(const Fruit& fruit) = default;
