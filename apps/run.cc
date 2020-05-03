@@ -6,10 +6,10 @@
 
 
 
-DEFINE_uint32(size, 16, "the number of tiles in each row and column");
-DEFINE_uint32(tilesize, 50, "the size of each tile");
-DEFINE_uint32(speed, 100, "the speed (delay) of the game");
-DEFINE_string(name, "Chirag", "the name of the player");
+DEFINE_uint32(size, 800, "the number of tiles in each row and column");
+DEFINE_uint32(tilesize, 1, "the size of each tile");
+DEFINE_uint32(speed, 0, "the speed (delay) of the game");
+DEFINE_string(name, "Player", "the name of the player");
 
 
 using cinder::app::App;
@@ -24,7 +24,9 @@ const int kHeight = 800;
 
 void SetUp(App::Settings* settings) {
   settings->setWindowSize(kWidth, kHeight);
+  settings->setFrameRate(60.0f);
   settings->setTitle("FruitGrabber");
+  settings->setResizable(false);
 }
 
 }  // namespace myapp

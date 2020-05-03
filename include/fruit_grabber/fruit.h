@@ -23,8 +23,13 @@ class Fruit {
   ~Fruit();
 
   Location GetLocation() const;
+
   int GetType() const;
+
+  // Called in each frame
   void Step();
+
+  // Called to draw the fruit
   void Draw();
 
   bool is_visible_;
@@ -33,9 +38,6 @@ class Fruit {
   Location location_;
   int type_;
   std::vector<cinder::Color> colors_;
-//  cinder::gl::Texture2dRef background_;
-//  cinder::gl::BatchRef	mSphere_;
-//  cinder::gl::GlslProgRef mGlsl_;
 };
 
 #endif  // FINALPROJECT_FRUIT_H

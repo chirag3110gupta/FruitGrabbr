@@ -16,7 +16,19 @@
    - Made fruits fall
    - Completed implementations of helpers
    
-- **4/26/20**  Implemented color recognition
+- **4/27/20**  Implemented color recognition
     - Implemented color recognition using openCV
     - Added colors to the fruits
     - Made game visually better
+    
+- **5/2/20** Made the grabber
+    - Using the color recognition got container locations
+    - Set that as the game background
+    - Game was too blocky and laggy
+    
+- **5/3/20** Finished up game and added draw functions
+    - Made a game over and pause state
+    - Made their respective draw functions
+    - Set a suitable frame rate and timings
+    - Added Background music
+    - Added comments and Documentation
