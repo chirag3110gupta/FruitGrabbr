@@ -10,6 +10,10 @@ layout.
 # FruitGrabber
 ![](assets/logo.jpg)
 
+An exciting game which uses Computer Vision
+
+Hold a green container in front of the webcam and start catching fruits !!!
+
 ## System Specs
 - Needs a Mac OS computer capable of running 60 fps with a working webcam and atleast 4 core processor.
 
