@@ -12,7 +12,8 @@ layout.
 
 An exciting game which uses Computer Vision
 
-Hold a green container in front of the webcam and start catching fruits !!!
+A World in which there are fruits falling from everywhere!! The player has to
+hold a green container in front of their webcam and start catching fruits !!!
 
 ## System Specs
 - Needs a Mac OS computer capable of running 60 fps with a working webcam and atleast 4 core processor.
